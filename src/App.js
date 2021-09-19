@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-//import AddMovie from './components/AddMovie';
+import AddMovie from './components/AddMovie';
 
 
 import MoviesList from "./components/MoviesList";
@@ -33,7 +33,7 @@ function App() {
       setMovies(transformedMovies);
       
     } catch (error) {
-      //console.log(error);
+      console.log(error);
       setError(error.message);
 
     }
@@ -45,8 +45,8 @@ function App() {
     fetchMoviesHandler();
   }, [fetchMoviesHandler]);
 
- /*  async function addMovieHandler(movie) {
-    const response = await fetch('https://react-http-6b4a6.firebaseio.com/movies.json', {
+  async function addMovieHandler(movie) {
+    const response = await fetch("https://react-movie-demo-79457-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json", {
       method: 'POST',
       body: JSON.stringify(movie),
       headers: {
@@ -55,7 +55,7 @@ function App() {
     });
     const data = await response.json();
     console.log(data);
-  } */
+  } 
   
   let content = <p>Found no movies.</p>;
 
@@ -75,7 +75,7 @@ function App() {
   return (
     <React.Fragment>
       <section>
-        
+        <AddMovie onAddMovie = {addMovieHandler} />
       </section>
       <section>
         <button onClick={fetchMoviesHandler}>Fetch Movies</button>
