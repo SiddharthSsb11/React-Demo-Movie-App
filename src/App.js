@@ -79,7 +79,7 @@ function App() {
         <AddMovie onAddMovie = {addMovieHandler} />
       </section>
       <section>
-        <button onClick={fetchMoviesHandler}>Fetch Movies</button>
+        <button onClick={fetchMoviesHandler}>Get your Movies</button>
       </section>
       <section> {content} </section>
     </React.Fragment>
