@@ -21,23 +21,24 @@ function App() {
       }
 
       const data = await response.json();
+      console.log(data);//an object with encrypted id as key and its value as another nested obj
 
-      const transformedMovies = data.results.map((movieData) => {
-        return {
-          id: movieData.episode_id,
-          title: movieData.title,
-          openingText: movieData.opening_crawl,
-          releaseDate: movieData.release_date,
-        };
-      });
-      setMovies(transformedMovies);
+      const loadedMovies = [];
+
+      for (const key in data) {
+        loadedMovies.push({
+          id: key,
+          title: data[key].title,
+          openingText: data[key].openingText,
+          releaseDate: data[key].releaseDate,
+        });
+      }
+      setMovies(loadedMovies);
       
     } catch (error) {
       console.log(error);
       setError(error.message);
-
     }
-
     setIsLoading(false);
   },  []);
 
@@ -48,7 +49,7 @@ function App() {
   async function addMovieHandler(movie) {
     const response = await fetch("https://react-movie-demo-79457-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json", {
       method: 'POST',
-      body: JSON.stringify(movie),
+      body: JSON.stringify(movie),//communicating btw FE & BE
       headers: {
         'Content-Type': 'application/json'
       }
